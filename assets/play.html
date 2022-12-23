@@ -1,0 +1,260 @@
+<html>
+
+
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=0.86">
+
+    <title>Spin The Wheel - Play</title>
+
+    <link rel="icon" href="../favicon.ico" type="image/favicon.ico/">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+
+    <link rel="stylesheet" href="/assets/css/main.css" type="text/css" />
+
+    <script src='/assets/js/Winwheel.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+</head>
+
+
+
+<body>
+
+    <nav class="nav-container">
+
+        <input type="checkbox" aria-label="Toggle menu" />
+
+        <span></span>
+
+        <span></span>
+
+        <span></span>
+
+        <div class="container">
+
+            <div class="menu-container">
+
+                <div class="nav-logo">
+
+                    <a href="#" class="menu-logo">
+
+                        <!-- <h4><b>Spin The Wheel</b></h4> -->
+
+                        <img src="/assets/img/spin-logo.png" alt="logo" />
+
+                    </a>
+
+                </div>
+
+                <div class="nav-xmas-stuff">
+                    <div class="xmas-logo">
+                        <img src="/assets/img/xmas-jbell.png" alt="logo" />
+                    </div>
+                    <div class="xmas-logo">
+                        <img src="/assets/img/xmas-jbell.png" alt="logo" />
+                    </div>
+                    <div class="xmas-logo">
+                        <img src="/assets/img/xmas-jbell.png" alt="logo" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </nav>
+    <!-- <div class="xmas-stuff">
+        <div class="xmas-logo">
+            <img src="/assets/img/xmas-jbell.png" alt="logo" />
+        </div>
+        <div class="xmas-logo">
+            <img src="/assets/img/xmas-jbell.png" alt="logo" />
+        </div>
+        <div class="xmas-logo">
+            <img src="/assets/img/xmas-jbell.png" alt="logo" />
+        </div>
+    </div> -->
+
+    <div class="main-container ">
+
+        <!-- <p id="display-spin"></p> -->
+
+        <div class="item-container ">
+
+            <!-- <div id="myModal " class="modal fade " tabindex="-1 " role="dialog " aria-labelledby="myModalLabel " aria-hidden="true "></div> -->
+
+            <!-- The Modal -->
+
+            <div class="modal fade" id="myModal">
+
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+
+
+
+                        <!-- Modal Header -->
+
+                        <div class="modal-header">
+
+                            <h4 class="modal-title">Confirmation</h4>
+
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+
+                        </div>
+
+
+
+                        <!-- Modal body -->
+
+                        <div class="modal-body">
+
+                            Maximum spins for the day has been exceeded. Check in 24hrs.
+
+                        </div>
+
+
+
+                        <!-- Modal footer -->
+
+                        <div class="modal-footer">
+
+                            <!--<a href="/assets/price-points.html">-->
+
+                            <!--    <button class="btn btn-primary"> Yes</button>-->
+
+                            <!--</a>-->
+
+                            <a href="#">
+
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
+
+                            </a>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal fade" id="winModal">
+
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+
+
+
+                        <!-- Modal Header -->
+
+                        <div class="modal-header">
+
+                            <h4 class="modal-title">Alert!</h4>
+
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+
+                        </div>
+
+
+
+                        <!-- Modal body -->
+
+                        <div class="modal-body" id="alert-msg">
+
+
+
+                        </div>
+
+
+
+                        <!-- Modal footer -->
+
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="reset-btn">
+
+                                <a href="#">Ok</a>
+
+                            </button>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="power-container ">
+
+                <img id="spin_button" class="spin_button " src="/assets/img/spin_on.png " alt="Spin" />
+
+                <br /><br/>
+
+                <!-- <a href="# " id="reset-wheel">Play Again (reset)</a> -->
+
+                <p id="display-spin" style="color: #FFFFFF;"></p>
+
+                <!-- <div id="muteSound"> 
+
+                    <i class="fa fa-volume-off fa-2x" aria-hidden="true"></i>
+
+                </div> -->
+
+            </div>
+
+            <div class="wheel-container ">
+
+                <table cellpadding="0 " cellspacing="0 " border="0 ">
+
+                    <tr>
+
+                        <td width="430 " height="535 " class="the_wheel " align="center " valign="center ">
+
+                            <canvas id="canvas" width="434 " height="434 ">
+
+                                <p style="color: white " align="center ">Sorry, your browser doesn't support canvas. Please try another.</p>
+
+                            </canvas>
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="module" src="/assets/js/play.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+
+</body>
+
+
+
+</html>
