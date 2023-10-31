@@ -23,39 +23,7 @@ let token = localStorage.getItem('x-auth-token');
 let displaySpin = document.getElementById('display-spin');
 
 
-
-
-// if (!localStorage.getItem('x-auth-token') || localStorage.getItem('x-auth-token') === undefined) {
-
-//     window.location.href = '/assets/login.html';
-
-// }
-
-
-
-// async function welcomeUser() {
-
-//     const user = await getUserDetails();
-
-//     if (user.message === 'Invalid Token') {
-
-//         window.location.href = '/index.html';
-
-//     }
-
-//     header.innerHTML = user.msg;
-
-//     headerMobile.innerHTML = user.msg;
-
-//     getUserSpin();
-
-//     getFreeSpin();
-
-// }
-
-
-
-// async function getUserSpin(){
+// async function authAndPlay() {
 
 //     const userDetails = await getUserDetails();
 
@@ -65,7 +33,15 @@ let displaySpin = document.getElementById('display-spin');
 
 //     msisdn = `0` + msisdn;
 
-//     const spinsLeft = await fetch(`http://localhost:3001/api/v1/users/${msisdn}/check-spins`, {
+//     const pricevalue = localStorage.getItem('price-value-token');
+
+//     // if (!pricevalue) {
+
+//     //     window.location.href = '/assets/price-points.html';
+
+//     // }
+
+//     const play = await fetch(`http://localhost:3001/api/v1/users/${msisdn}/play`, {
 
 //         method: 'GET',
 
@@ -77,199 +53,31 @@ let displaySpin = document.getElementById('display-spin');
 
 //             'Content-Type': 'application/json'
 
-//         },
+//         }
 
-//     }).then((data) => data.json());
+//     }).then(data => {
 
-//     displaySpin.innerHTML = spinsLeft.msg;
+//         if (data.status === 400) {
 
-//     return spinsLeft;
+//             localStorage.removeItem('price-value-token');
 
-// }
+//             $(document).ready(function() {
 
+//                 $("#myModal").modal('show');
 
+//             });
 
-// async function getFreeSpin(){
+//             return;
 
-//     const userDetails = await getUserDetails();
+//         }
 
-//     let msisdn = userDetails.msisdn;
-
-//     msisdn = msisdn.slice(3);
-
-//     msisdn = `0` + msisdn;
-
-//     const freeSpin = await fetch(`http://localhost:3001/api/v1/users/${msisdn}/free-spin`, {
-
-//         method: 'GET',
-
-//         headers: {
-
-//             'x-auth-token': token,
-
-//             'Accept': 'application/json',
-
-//             'Content-Type': 'application/json'
-
-//         },
-
-//     }).then((data) => data.json());
-
-//     $(document).ready(function() {
-
-//         alertMsg.innerHTML = freeSpin.msg;
-
-//         $("#winModal").modal('show');
+//         return data.json();
 
 //     });
 
-//     return freeSpin;
+//     return play;
 
 // }
-
-
-
-
-
-// function logoutUser() {
-
-//     localStorage.removeItem('x-auth-token');
-
-//     // localStorage.removeItem('price-value-token');
-
-//     window.location.href = '/index.html';
-
-// }
-
-
-
-
-
-// async function getUserDetails() {
-
-//     const userMsisdn = await fetch('http://localhost:3001/api/v1/auth-user', {
-
-//         method: 'GET',
-
-//         headers: {
-
-//             'x-auth-token': token,
-
-//             'Accept': 'application/json',
-
-//             'Content-Type': 'application/json'
-
-//         },
-
-//     }).then((data) => data.json());
-
-//     if (!userMsisdn.msisdn) {
-
-//         window.location.href = '/assets/login.html';
-
-//     }
-
-//     return userMsisdn;
-
-// }
-
-
-
-// async function getWalletBalance() {
-
-//     const userDetails = await getUserDetails();
-
-//     let msisdn = userDetails.msisdn;
-
-//     msisdn = msisdn.slice(3);
-
-//     msisdn = `0` + msisdn;
-
-//     const walletBalance = await fetch(`http://localhost:3001/api/v1/users/${msisdn}/check-balance`, {
-
-//         method: 'GET',
-
-//         headers: {
-
-//             'x-auth-token': token,
-
-//             'Accept': 'application/json',
-
-//             'Content-Type': 'application/json'
-
-//         },
-
-//     }).then((data) => data.json());
-
-//     wallet.innerHTML = `Balance: ${currencyFormat(walletBalance.walletBalance)}`;
-
-//     walletMobile.innerHTML = `Balance: ${currencyFormat(walletBalance.walletBalance)}`;
-
-//     return walletBalance;
-
-// }
-
-
-
-// getWalletBalance();
-
-
-
-async function authAndPlay() {
-
-    const userDetails = await getUserDetails();
-
-    let msisdn = userDetails.msisdn;
-
-    msisdn = msisdn.slice(3);
-
-    msisdn = `0` + msisdn;
-
-    const pricevalue = localStorage.getItem('price-value-token');
-
-    // if (!pricevalue) {
-
-    //     window.location.href = '/assets/price-points.html';
-
-    // }
-
-    const play = await fetch(`http://localhost:3001/api/v1/users/${msisdn}/play`, {
-
-        method: 'GET',
-
-        headers: {
-
-            'x-auth-token': token,
-
-            'Accept': 'application/json',
-
-            'Content-Type': 'application/json'
-
-        }
-
-    }).then(data => {
-
-        if (data.status === 400) {
-
-            localStorage.removeItem('price-value-token');
-
-            $(document).ready(function() {
-
-                $("#myModal").modal('show');
-
-            });
-
-            return;
-
-        }
-
-        return data.json();
-
-    });
-
-    return play;
-
-}
 
 
 
@@ -277,19 +85,19 @@ let item;
 
 const wheelOneItems = [ 
 
-    {'strokeStyle' : '#FF00CE', 'fillStyle' : '#FF00CE', 'text' : 'Bag of Rice', 'textFontSize' : 22, 'textFillStyle' : '#ffffff'},
+    {'strokeStyle' : '#FF00CE', 'fillStyle' : '#FF00CE', 'text' : '₦1000 Data', 'textFontSize' : 22, 'textFillStyle' : '#ffffff'},
 
     {'strokeStyle' : '#611754', 'fillStyle' : '#611754', 'text' : 'Nothing Here', 'textFontSize' : 20, 'textFillStyle' : '#ffffff'},
 
-    {'strokeStyle' : '#006993', 'fillStyle' : '#006993', 'text' : 'Gift Hamper', 'textFontSize' : 20, 'textFillStyle' : '#ffffff'},
+    {'strokeStyle' : '#006993', 'fillStyle' : '#006993', 'text' : '₦1000 Airtime', 'textFontSize' : 20, 'textFillStyle' : '#ffffff'},
 
-    {'strokeStyle' : '#48887A', 'fillStyle' : '#48887A', 'text' : 'Nothing Here', 'textFontSize' : 20, 'textFillStyle' : '#ffffff'},
+    {'strokeStyle' : '#48887A', 'fillStyle' : '#48887A', 'text' : 'Try Again', 'textFontSize' : 20, 'textFillStyle' : '#ffffff'},
 
-    {'strokeStyle' : '#D02180', 'fillStyle' : '#D02180', 'text' : '₦5,000', 'textFontSize' : 22, 'textFillStyle' : '#ffffff'},
+    {'strokeStyle' : '#D02180', 'fillStyle' : '#D02180', 'text' : '₦5,000 Cash', 'textFontSize' : 22, 'textFillStyle' : '#ffffff'},
 
-    {'strokeStyle' : '#2C2E54', 'fillStyle' : '#2C2E54', 'text' : '₦1000 Airtime', 'textFontSize' : 20, 'textFillStyle' : '#ffffff'},
+    {'strokeStyle' : '#2C2E54', 'fillStyle' : '#2C2E54', 'text' : 'Try Again', 'textFontSize' : 20, 'textFillStyle' : '#ffffff'},
 
-    {'strokeStyle' : '#FFCC2A', 'fillStyle' : '#FFCC2A', 'text' : '₦50,000', 'textFontSize' : 22, 'textFillStyle' : '#ffffff'},
+    // {'strokeStyle' : '#FFCC2A', 'fillStyle' : '#FFCC2A', 'text' : '₦50,000', 'textFontSize' : 22, 'textFillStyle' : '#ffffff'},
 
     {'strokeStyle' : '#5BC6D0', 'fillStyle' : '#5BC6D0', 'text' : 'Nothing Here', 'textFontSize' : 20, 'textFillStyle' : '#ffffff'}
 
@@ -315,7 +123,7 @@ let theWheel = new Winwheel({
 
     'textDirection': 'reversed',
 
-    'numSegments': 8, // Specify number of segments.
+    'numSegments': 7, // Specify number of segments.
 
     // 'pointerAngle': 315, 
 
@@ -349,7 +157,7 @@ let theWheel = new Winwheel({
 
     {
 
-        'number': 8,
+        'number': 7,
 
         'fillStyle': '#FFECA7',
 
@@ -398,24 +206,6 @@ function playSound() {
     audio.play()
 
 }
-
-
-
-// function muteSound(){
-
-//     // Stop and rewind the sound if it already happens to be playing.
-
-//     audio.play();
-
-//     audio.currentTime = 0;
-
-
-
-//     // Play the sound.
-
-//     audio.pause()
-
-// }
 
 
 
