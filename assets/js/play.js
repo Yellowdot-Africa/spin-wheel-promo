@@ -323,10 +323,10 @@ function resetWheel() {
 
 function alertPrize(indicatedSegment) {
 
-    if (indicatedSegment.text == 'Nothing Here') {
+    if (indicatedSegment.text == 'Nothing Here' || indicatedSegment.text == 'Try Again') {
 
         // alert('OOPS! Nothing to Win here.&#128557');
-        alertMsg.innerHTML = 'Oops! Nothing to Win here.&#128557';
+        alertMsg.innerHTML = 'Oops! Nothing to Win here. &#128557';
 
         $("#winModal").modal('show');
 
